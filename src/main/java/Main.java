@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.*;
-
+// haloo
 public class Main {
     private Window window = new Window(1080, 1080, "Hello World");
     ArrayList<Object> objectObj = new ArrayList<>();
