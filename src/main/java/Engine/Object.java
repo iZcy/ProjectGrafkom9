@@ -195,7 +195,7 @@ public class Object extends ShaderProgram{
         uniformsMap.setUniform("spotLight.position", new Vector3f(0, 0, 0));
         uniformsMap.setUniform("spotLight.direction", new Vector3f(0, 0, 0));
         uniformsMap.setUniform("spotLight.ambient", new Vector3f(0.0f, 0.0f ,0.0f));
-        uniformsMap.setUniform("spotLight.diffuse", new Vector3f(1.0f, 1.0f, 1.0f));
+        uniformsMap.setUniform("spotLight.diffuse", new Vector3f(10.0f, 1.0f, 1.0f));
         uniformsMap.setUniform("spotLight.specular", new Vector3f(1.0f, 1.0f, 1.0f));
         uniformsMap.setUniform("spotLight.constant", 1.0f);
         uniformsMap.setUniform("spotLight.linear", 0.09f);
