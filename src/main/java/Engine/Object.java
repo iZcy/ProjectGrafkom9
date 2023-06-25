@@ -253,18 +253,6 @@ public class Object extends ShaderProgram{
         }
     }
 
-    public void draw(Camera camera, Projection projection, String name, Vector3f settings){
-        drawSetup(camera, projection);
-        glLineWidth(10);
-        glPointSize(10);
-        glDrawArrays(GL_TRIANGLES,
-                0,
-                vertices.size());
-        for(Object child:childObject){
-            child.draw(camera,projection);
-        }
-    }
-
     public void translateObject(Float offsetX,Float offsetY,Float offsetZ){
         model = new Matrix4f().translate(offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
         updateCenterPoint();
