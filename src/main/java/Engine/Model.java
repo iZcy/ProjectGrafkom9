@@ -23,8 +23,8 @@ public class Model extends Object{
     List <Vector2f> textures;
     List <Face> faces;
     int nbo;
-    public Model(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, String filename) throws IOException {
-        super(shaderModuleDataList, vertices, color);
+    public Model(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, String filename, String nama, Vector3f pseudoSize, int type) throws IOException {
+        super(shaderModuleDataList, vertices, color, nama, pseudoSize, type);
         normals = new ArrayList<>();
         faces= new ArrayList<>();
         textures = new ArrayList<>();
@@ -45,14 +45,14 @@ public class Model extends Object{
                     x = Float.parseFloat(line.split(" ")[1]);
                     y = Float.parseFloat(line.split(" ")[2]);
                     z = Float.parseFloat(line.split(" ")[3]);
-                    System.out.println("Vertices: "+x+" "+y+" "+z);
+                    // System.out.println("Vertices: "+x+" "+y+" "+z);
                     verticeV.add(new Vector3f(x, y, z));
                 }
                 else if (line.startsWith("vn ")) {
                     x = Float.parseFloat(line.split(" ")[1]);
                     y = Float.parseFloat(line.split(" ")[2]);
                     z = Float.parseFloat(line.split(" ")[3]);
-                    System.out.println("Normals: "+x+" "+y+" "+z);
+                    // System.out.println("Normals: "+x+" "+y+" "+z);
                     normalV.add(new Vector3f(x, y, z));
                 }
                 else if (line.startsWith("vt ")) {
@@ -88,7 +88,7 @@ public class Model extends Object{
 
         for (Face face: faces ){
             Vector3f n1 = normalV.get((int)face.normal.x - 1);
-            System.out.println(n1);
+            // System.out.println(n1);
             normals.add(n1);
             Vector3f v1 = verticeV.get((int)face.vertex.x - 1);
             vertices.add(v1);
