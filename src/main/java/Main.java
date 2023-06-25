@@ -38,6 +38,7 @@ public class Main {
     float rotateDiv = 0.f;
     float rotating = (float)Math.toRadians(1f);
     List<Float> temp;
+    SkyBox skyBox;
     int modeToggle = 0;
     boolean delay = false;
     int delayCounter = 0;
@@ -61,6 +62,7 @@ public class Main {
         camera.setPosition(-6.485f, 20f, -3.464f);
         camera.setRotation((float) Math.toRadians(60), (float) Math.toRadians(90));
 
+        skyBox = new SkyBox();
         // Pacman
         objectObj.add(new Model(
                 Arrays.asList(
@@ -643,6 +645,8 @@ public class Main {
             for (Object object: objectGhost){
                 object.draw(camera, projection);
             }
+
+            skyBox.draw(camera, projection);
 
             // Restore state
             glDisableVertexAttribArray(0);
