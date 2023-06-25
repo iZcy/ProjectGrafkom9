@@ -176,31 +176,31 @@ public class Object extends ShaderProgram{
                 "view", camera.getViewMatrix());
         uniformsMap.setUniform(
                 "projection", projection.getProjMatrix());
-        uniformsMap.setUniform("dirLight.direction", new Vector3f(-0.2f, -1.0f, -0.3f));
+        uniformsMap.setUniform("dirLight.direction", new Vector3f(-4.2f, 1.0f, -0.3f));
         uniformsMap.setUniform("dirLight.ambient", new Vector3f(0.1f, 0.1f, 0.1f));
         uniformsMap.setUniform("dirLight.diffuse", new Vector3f(0.4f, 0.4f, 0.4f));
         uniformsMap.setUniform("dirLight.specular", new Vector3f(0.5f, 0.5f, 0.5f));
 
         Vector3f[] _pointLightPositions = {
-                new Vector3f(2f, 2f, 4.3f),
-                new Vector3f(-2f, 2f, 4.3f),
-                new Vector3f(2f, 2, -4.3f),
-                new Vector3f(-2f, 2f, -4.3f),
+                new Vector3f(45.f, 51.f, 5.f),
+                new Vector3f(45.f, 51.f, 5.f),
+                new Vector3f(45.f, 51.f, 5.f),
+                new Vector3f(45.f, 51.f, 5.f),
         };
 
         for(int i = 0; i < _pointLightPositions.length; i++){
             uniformsMap.setUniform("pointLight["+i+"].position", _pointLightPositions[i]);
             uniformsMap.setUniform("pointLight["+i+"].ambient", new Vector3f(0.1f, 0.1f, 0.1f));
             uniformsMap.setUniform("pointLight["+i+"].diffuse", new Vector3f(0.8f, 0.8f, 0.8f));
-            uniformsMap.setUniform("pointLight["+i+"].specular", new Vector3f(0.5f, 0.5f, 0.5f));
+            uniformsMap.setUniform("pointLight["+i+"].specular", new Vector3f(2.7f, 2.7f, 2.7f));
             uniformsMap.setUniform("pointLight["+i+"].constant", 1.0f);
             uniformsMap.setUniform("pointLight["+i+"].linear", 0.09f);
             uniformsMap.setUniform("pointLight["+i+"].quadratic", 0.032f);
         }
 
         // spotLight
-        uniformsMap.setUniform("spotLight.position", new Vector3f(0, 0, 0));
-        uniformsMap.setUniform("spotLight.direction", new Vector3f(0, 0, 0));
+        uniformsMap.setUniform("spotLight.position", new Vector3f(45.f, 51.f, 5.f));
+        uniformsMap.setUniform("spotLight.direction", new Vector3f(0, -10.f, 0));
         uniformsMap.setUniform("spotLight.ambient", new Vector3f(0.0f, 0.0f ,0.0f));
         uniformsMap.setUniform("spotLight.diffuse", new Vector3f(10.0f, 1.0f, 1.0f));
         uniformsMap.setUniform("spotLight.specular", new Vector3f(1.0f, 1.0f, 1.0f));
@@ -321,6 +321,9 @@ public class Object extends ShaderProgram{
         model = new Matrix4f().translate(offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
         updateCenterPoint();
         for(Object child:childObject){
+            centerPoint.set(0,centerPoint.get(0) + offsetX);
+            centerPoint.set(1,centerPoint.get(1) + offsetY);
+            centerPoint.set(2,centerPoint.get(2) + offsetZ);
             child.translateObject(offsetX,offsetY,offsetZ);
         }
     }
@@ -329,6 +332,9 @@ public class Object extends ShaderProgram{
         model = new Matrix4f().rotate(degree,x,y,z).mul(new Matrix4f(model));
         updateCenterPoint();
         for(Object child:childObject){
+            centerPoint.set(0,centerPoint.get(0) + x);
+            centerPoint.set(1,centerPoint.get(1) + y);
+            centerPoint.set(2,centerPoint.get(2) + z);
             child.rotateObject(degree,x,y,z);
         }
     }
@@ -440,6 +446,13 @@ public class Object extends ShaderProgram{
         position.add(centerPoint.get(1));
         position.add(centerPoint.get(2));
         return position;
+    }
+
+    public void setPosition(float x, float y, float z) {
+        centerPoint.set(0, x);
+        centerPoint.set(1, y);
+        centerPoint.set(2, z);
+        updateCenterPoint();
     }
 
     public String getName() {

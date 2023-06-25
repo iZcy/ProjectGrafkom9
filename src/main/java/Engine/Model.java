@@ -17,7 +17,6 @@ import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 
-
 public class Model extends Object{
     List <Vector3f> normals;
     List <Vector2f> textures;
@@ -108,7 +107,6 @@ public class Model extends Object{
         super.setupVAOVBO();
         nbo = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, nbo);
-        //mengirim vertices ke shader
         glBufferData(GL_ARRAY_BUFFER,
                 Utils.listoFloat(normals),
                 GL_STATIC_DRAW);
