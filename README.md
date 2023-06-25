@@ -1,2 +1,2 @@
-# uas_grafkom_29
-*Kelompok 9
+# uas_grafkom_1
+*Kelompok 1
