@@ -34,12 +34,11 @@ public class Main {
     float ghostSpd = 0.5f;
     ArrayList<Vector3f> moveGhosts = new ArrayList<Vector3f>();
     float moveCam = 0.7f;
-    float rotateVal = 0.f;
-    float rotateDiv = 0.f;
-    float rotating = (float)Math.toRadians(1f);
+    float rotating = (float)Math.toRadians(2.5f);
     List<Float> temp;
     SkyBox skyBox;
     int modeToggle = 0;
+    int lightToggle = 0;
     boolean delay = false;
     int delayCounter = 0;
 
@@ -359,8 +358,8 @@ public class Main {
                 new Vector3f(5.f, 2.f, 25.f),
 
                 new Vector3f(40.f, 2.f, 32.f),
-                new Vector3f(30.f, 2.f, 0.f),
-                new Vector3f(5.f, 2.f, 32.f),
+                new Vector3f(35.f, 2.f, 0.f),
+                new Vector3f(15.f, 2.f, 32.f),
 
                 new Vector3f(40.f, 2.f, -11.f),
                 new Vector3f(25.f, 2.f, -11.f),
@@ -381,7 +380,7 @@ public class Main {
                             new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER)
                     ),
                     new ArrayList<>(),
-                    new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),
+                    new Vector4f((float)(100*Math.random()%4), (float)(100*Math.random()%4), (float)(100*Math.random()%4), 1.0f),
                     "resources/model/pacman/karakterpacman/pacman_ghost.obj",
                     "ghost",
                     new Vector3f(.5f, .5f, .5f),
@@ -409,7 +408,7 @@ public class Main {
         if (window.isKeyPressed(GLFW_KEY_F) && !delay){
             modeToggle++;
             modeToggle = modeToggle % 2;
-            System.out.println("Model Toggle: " + modeToggle);
+            // System.out.println("Model Toggle: " + modeToggle);
             delay = true;
         }
 
@@ -456,6 +455,13 @@ public class Main {
             }
         }
 
+        if (window.isKeyPressed(GLFW_KEY_M) && !delay) {
+            lightToggle++;
+            lightToggle = lightToggle % 2;
+            //System.out.println("Model Light: " + lightToggle);
+            delay = true;
+        }
+
         if (window.isKeyPressed(GLFW_KEY_UP)) {
             if (modeToggle == 1) {
                 camera.addRotation(-rotating, 0f);
@@ -476,19 +482,19 @@ public class Main {
         }
         if (window.isKeyPressed(GLFW_KEY_LEFT)) {
             if (modeToggle == 1) {
-                camera.addRotation(0f, -rotating);
+                camera.addRotation(0f, -1.5f * rotating);
             } else {
                 camera.moveForward(distance);
-                camera.addRotation(0f, -rotating);
+                camera.addRotation(0f, -1.5f * rotating);
                 camera.moveBackwards(distance);
             }
         }
         if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
             if (modeToggle == 1) {
-                camera.addRotation(0f, rotating);
+                camera.addRotation(0f, 1.5f * rotating);
             } else {
                 camera.moveForward(distance);
-                camera.addRotation(0f, rotating);
+                camera.addRotation(0f, 1.5f * rotating);
                 camera.moveBackwards(distance);
             }
         }
@@ -630,6 +636,8 @@ public class Main {
             }
 
             // code here
+            skyBox.draw(camera, projection);
+
             for (Object object: objectObj) {
                 object.draw(camera, projection);
             }
@@ -645,8 +653,6 @@ public class Main {
             for (Object object: objectGhost){
                 object.draw(camera, projection);
             }
-
-            skyBox.draw(camera, projection);
 
             // Restore state
             glDisableVertexAttribArray(0);

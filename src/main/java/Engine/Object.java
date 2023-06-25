@@ -176,37 +176,37 @@ public class Object extends ShaderProgram{
                 "view", camera.getViewMatrix());
         uniformsMap.setUniform(
                 "projection", projection.getProjMatrix());
-        uniformsMap.setUniform("dirLight.direction", new Vector3f(-4.2f, 1.0f, -0.3f));
+        uniformsMap.setUniform("dirLight.direction", new Vector3f(-0.3f, -3f, 0f));
         uniformsMap.setUniform("dirLight.ambient", new Vector3f(0.1f, 0.1f, 0.1f));
-        uniformsMap.setUniform("dirLight.diffuse", new Vector3f(0.4f, 0.4f, 0.4f));
+        uniformsMap.setUniform("dirLight.diffuse", new Vector3f(2.4f, 2.4f, 2.4f));
         uniformsMap.setUniform("dirLight.specular", new Vector3f(0.5f, 0.5f, 0.5f));
 
         Vector3f[] _pointLightPositions = {
-                new Vector3f(45.f, 51.f, 5.f),
-                new Vector3f(45.f, 51.f, 5.f),
-                new Vector3f(45.f, 51.f, 5.f),
-                new Vector3f(45.f, 51.f, 5.f),
+                new Vector3f(-1f, 100f, 3f),
+                new Vector3f(49f, 100f, 3f),
+                new Vector3f(99f, 100f, 3f),
+                new Vector3f(149f, 100f, 3f),
         };
 
         for(int i = 0; i < _pointLightPositions.length; i++){
             uniformsMap.setUniform("pointLight["+i+"].position", _pointLightPositions[i]);
             uniformsMap.setUniform("pointLight["+i+"].ambient", new Vector3f(0.1f, 0.1f, 0.1f));
             uniformsMap.setUniform("pointLight["+i+"].diffuse", new Vector3f(0.8f, 0.8f, 0.8f));
-            uniformsMap.setUniform("pointLight["+i+"].specular", new Vector3f(2.7f, 2.7f, 2.7f));
+            uniformsMap.setUniform("pointLight["+i+"].specular", new Vector3f(0.5f, 0.5f, 0.5f));
             uniformsMap.setUniform("pointLight["+i+"].constant", 1.0f);
-            uniformsMap.setUniform("pointLight["+i+"].linear", 0.09f);
-            uniformsMap.setUniform("pointLight["+i+"].quadratic", 0.032f);
+            uniformsMap.setUniform("pointLight["+i+"].linear", 0.0014f);
+            uniformsMap.setUniform("pointLight["+i+"].quadratic", 0.000007f);
         }
 
         // spotLight
-        uniformsMap.setUniform("spotLight.position", new Vector3f(45.f, 51.f, 5.f));
-        uniformsMap.setUniform("spotLight.direction", new Vector3f(0, -10.f, 0));
+        uniformsMap.setUniform("spotLight.position", new Vector3f(0f, 0.f, 0.f));
+        uniformsMap.setUniform("spotLight.direction", new Vector3f(0, -3f, 0));
         uniformsMap.setUniform("spotLight.ambient", new Vector3f(0.0f, 0.0f ,0.0f));
-        uniformsMap.setUniform("spotLight.diffuse", new Vector3f(10.0f, 1.0f, 1.0f));
+        uniformsMap.setUniform("spotLight.diffuse", new Vector3f(1.0f, 1.0f, 1.0f));
         uniformsMap.setUniform("spotLight.specular", new Vector3f(1.0f, 1.0f, 1.0f));
         uniformsMap.setUniform("spotLight.constant", 1.0f);
-        uniformsMap.setUniform("spotLight.linear", 0.09f);
-        uniformsMap.setUniform("spotLight.quadratic", 0.032f);
+        uniformsMap.setUniform("spotLight.linear", 0.007f);
+        uniformsMap.setUniform("spotLight.quadratic", 0.0002f);
 //        uniformsMap.setUniform("spotLight.cutOff", (float)Math.cos(Math.toRadians(30f)));
 //        uniformsMap.setUniform("spotLight.outerCutOff", (float)Math.cos(Math.toRadians(30f)));
         uniformsMap.setUniform("spotLight.cutOff", 0f);
@@ -243,17 +243,8 @@ public class Object extends ShaderProgram{
     }
     public void draw(Camera camera, Projection projection){
         drawSetup(camera, projection);
-        // Draw the vertices
-        //optional
-        glLineWidth(10); //ketebalan garis
-        glPointSize(10); //besar kecil vertex
-        //wajib
-        //GL_LINES
-        //GL_LINE_STRIP
-        //GL_LINE_LOOP
-        //GL_TRIANGLES
-        //GL_TRIANGLE_FAN
-        //GL_POINT
+        glLineWidth(10);
+        glPointSize(10);
         glDrawArrays(GL_TRIANGLES,
                 0,
                 vertices.size());
@@ -262,20 +253,11 @@ public class Object extends ShaderProgram{
         }
     }
 
-    public void drawEllips(Camera camera, Projection projection){
+    public void draw(Camera camera, Projection projection, String name, Vector3f settings){
         drawSetup(camera, projection);
-        // Draw the vertices
-        //optional
-        glLineWidth(10); //ketebalan garis
-        glPointSize(10); //besar kecil vertex
-        //wajib
-        //GL_LINES
-        //GL_LINE_STRIP
-        //GL_LINE_LOOP
-        //GL_TRIANGLES
-        //GL_TRIANGLE_FAN
-        //GL_POINT
-        glDrawArrays(GL_TRIANGLE_FAN,
+        glLineWidth(10);
+        glPointSize(10);
+        glDrawArrays(GL_TRIANGLES,
                 0,
                 vertices.size());
         for(Object child:childObject){
@@ -283,40 +265,6 @@ public class Object extends ShaderProgram{
         }
     }
 
-    public void drawWithVerticesColor(){
-        drawSetupWithVerticesColor();
-        // Draw the vertices
-        //optional
-        glLineWidth(10); //ketebalan garis
-        glPointSize(10); //besar kecil vertex
-        //wajib
-        //GL_LINES
-        //GL_LINE_STRIP
-        //GL_LINE_LOOP
-        //GL_TRIANGLES
-        //GL_TRIANGLE_FAN
-        //GL_POINT
-        glDrawArrays(GL_POLYGON,
-                0,
-                vertices.size());
-    }
-    public void drawLine(Camera camera, Projection projection){
-        drawSetup(camera, projection);
-        // Draw the vertices
-        //optional
-        glLineWidth(1); //ketebalan garis
-        glPointSize(1); //besar kecil vertex
-        glDrawArrays(GL_TRIANGLE_FAN,
-                0,
-                vertices.size());
-        for(Object child:childObject){
-            child.drawLine(camera,projection);
-        }
-    }
-    public void addVertices(Vector3f newVertices){
-        vertices.add(newVertices);
-        setupVAOVBO();
-    }
     public void translateObject(Float offsetX,Float offsetY,Float offsetZ){
         model = new Matrix4f().translate(offsetX,offsetY,offsetZ).mul(new Matrix4f(model));
         updateCenterPoint();
@@ -350,24 +298,6 @@ public class Object extends ShaderProgram{
         for(Object child:childObject){
             child.translateObject(scaleX,scaleY,scaleZ);
         }
-    }
-    public void setVertices(List<Vector3f> vertices) {
-        this.vertices = vertices;
-        setupVAOVBO();
-    }
-
-    public void addVerticesForCurve(Vector3f newVector) {
-        vertices.add(newVector);
-    }
-
-    public void createCurve(){
-        curve.clear();
-        for(double i = 0; i <= 1.01; i += 0.01){
-            curve.add(bezierCurve(i));
-        }
-        this.vertices = curve;
-        setupVAOVBO();
-        this.isCurve = true;
     }
 
     private Vector3f bezierCurve(double t){
@@ -446,13 +376,6 @@ public class Object extends ShaderProgram{
         position.add(centerPoint.get(1));
         position.add(centerPoint.get(2));
         return position;
-    }
-
-    public void setPosition(float x, float y, float z) {
-        centerPoint.set(0, x);
-        centerPoint.set(1, y);
-        centerPoint.set(2, z);
-        updateCenterPoint();
     }
 
     public String getName() {

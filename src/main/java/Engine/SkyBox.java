@@ -113,10 +113,9 @@ public class SkyBox extends ShaderProgram
         viewMatrix.m31(0);
         viewMatrix.m32(0);
 
-        //isi uniform dengan variabel dari objek
-        uniformsMap.setUniform("projectionMatrix", projection.getProjMatrix());
-        uniformsMap.setUniform("viewMatrix", viewMatrix);
-        uniformsMap.setUniform("cubeMap", 0);
+//        uniformsMap.setUniform("projectionMatrix", projection.getProjMatrix());
+//        uniformsMap.setUniform("viewMatrix", vi dewMatrix);
+//        uniformsMap.setUniform("cubeMap", 0);fs
 
 
         glEnableVertexAttribArray(0);

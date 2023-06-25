@@ -112,13 +112,13 @@ public class Model extends Object{
                 GL_STATIC_DRAW);
     }
 
-    public void drawSetup(Camera camera, Projection projection) {
-        super.drawSetup(camera, projection);
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, nbo);
-        glVertexAttribPointer(1,
-                3, GL_FLOAT,
-                false,
-                0, 0);
-    }
+//    public void drawSetup(Camera camera, Projection projection, int num) {
+//        super.drawSetup(camera, projection, num);
+//        glEnableVertexAttribArray(1);
+//        glBindBuffer(GL_ARRAY_BUFFER, nbo);
+//        glVertexAttribPointer(1,
+//                3, GL_FLOAT,
+//                false,
+//                0, 0);
+//    }
 }
